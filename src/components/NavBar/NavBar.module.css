@@ -1,0 +1,20 @@
+.navbar{
+    display: block;
+}
+
+.navigation-list{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.navigation-list__item {
+    height: 100%;
+    margin: 10px;
+}
+
+.navigation-list__link {
+    padding: 5px;
+    font-size: 20px;
+}
