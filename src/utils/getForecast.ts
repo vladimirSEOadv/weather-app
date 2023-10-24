@@ -1,6 +1,7 @@
 import {weatherMockResponse} from "../mocks/data";
 
-export const getWeather = async (city, cb) => {
+export const getForecast = async (q, lang) => {
+    console.log("lang in getForecast", lang)
     try {
         // const res = await axios.get(`https://api.openweathermap.org/data/2.5/forecast`, {
         //   params: {
@@ -9,8 +10,8 @@ export const getWeather = async (city, cb) => {
         //   }
         // })
         const res = weatherMockResponse
-        cb(res.data)
-    } catch(error){
+        return res.data
+    } catch (error) {
         console.log(error)
     }
 }

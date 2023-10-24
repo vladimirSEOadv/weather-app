@@ -1,6 +1,6 @@
 import {ipServiceMockResponse} from "../mocks/data";
 
-export const getCurrentCity = async (cb) => {
+export const getUserCity = async () => {
     try {
         // const res = await axios.get(`https://ipinfo.io/json`, {
         //   params: {
@@ -8,9 +8,8 @@ export const getCurrentCity = async (cb) => {
         //   }
         // })
         const res = ipServiceMockResponse
-        const userCity = res.data.city;
-        cb(userCity)
-    } catch(error){
+        return res.data.city;
+    } catch (error) {
         console.log(error)
     }
 }

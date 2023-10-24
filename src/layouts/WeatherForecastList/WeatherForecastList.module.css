@@ -1,0 +1,12 @@
+.forecast-list{
+}
+
+.forecast-list__header{
+	margin-bottom: 15px;
+}
+
+.forecast-list__content{
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+}

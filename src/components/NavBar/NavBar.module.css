@@ -9,8 +9,13 @@
     align-items: center;
 }
 
+@media (max-width: 460px) {
+    .navigation-list{
+        flex-direction: column;
+    }
+}
+
 .navigation-list__item {
-    height: 100%;
     margin: 10px;
 }
 

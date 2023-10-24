@@ -1,7 +1,7 @@
 import React from "react";
-import styles from "./Input.module.css";
+import styles from "./CustomInput.module.css";
 
-export const Input: React.FC = ({placeholder, cb, value}) => {
+export const CustomInput: React.FC = ({placeholder, cb, value=''}) => {
 	const handleChange = (event) => {
 		cb(event.target.value)
 	}

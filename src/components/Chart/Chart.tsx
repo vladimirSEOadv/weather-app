@@ -48,14 +48,14 @@ export const data = {
 	labels,
 	datasets: [
 		{
-			label: 'Dataset 1',
+			label: 'Weather forecast for 5 days',
 			data: [1, 2, 3, 4, 5, 6, 7],
 			backgroundColor: 'rgba(255, 99, 132, 0.5)',
 		},
 	],
 };
 export const Chart: React.FC = () => {
-	return <section className="content-main__chart">
+	return <section className={styles["chart"]}>
 		<Bar options={options} data={data}/>
 	</section>
 }
