@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./CustomInput.module.css";
 
-export const CustomInput: React.FC = ({placeholder, cb, value=''}) => {
+export const CustomInput: React.FC = ({placeholder, cb, value = ''}) => {
 	const handleChange = (event) => {
 		cb(event.target.value)
 	}
@@ -10,6 +10,7 @@ export const CustomInput: React.FC = ({placeholder, cb, value=''}) => {
 					value={value}
 					onChange={handleChange}
 					className={`${styles["input"]} ${styles["input-default"]}`}
-					placeholder={placeholder} type="text"/>
+					placeholder={placeholder} type="text">
+			</input>
 	)
 }

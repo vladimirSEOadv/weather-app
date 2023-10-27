@@ -1,9 +1,10 @@
 import React, {createContext, useCallback, useMemo, useState} from "react";
+import {LANGS} from "../../constant/langs";
 
 export const LangContext = createContext(null)
 
 export const LangContextWrapper: React.FC = ({children}) => {
-	const [currentLang, setCurrentLang] = useState('ua')
+	const [currentLang, setCurrentLang] = useState(LANGS[0])
 	console.log("currentLang", currentLang)
 	const langSetter = useCallback((newLang) => {
 		setCurrentLang(newLang);

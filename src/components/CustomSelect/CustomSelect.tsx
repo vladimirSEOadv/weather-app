@@ -9,7 +9,7 @@ export const CustomSelect: React.FC = ({options, cb, value}) => {
 
 	return (
 			<select value={value} onChange={handlerChange} className={styles['select']}>
-				{options.map((option) => <option key={option} value={option}>{option}</option>)}
+				{options.map((option) => <option className={styles["select__options"]} key={option} value={option}>{option}</option>)}
 			</select>
 	)
 }

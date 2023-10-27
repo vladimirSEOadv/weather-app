@@ -1,1 +1,1 @@
-export const LANGS = ['en', 'ua']
+export const LANGS = ['en', 'uk']

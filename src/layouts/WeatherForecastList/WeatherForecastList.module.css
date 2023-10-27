@@ -2,7 +2,11 @@
 }
 
 .forecast-list__header{
-	margin-bottom: 15px;
+	margin-bottom: 0.5rem;
+}
+
+.header-forecast__wrapper-for-add-button{
+
 }
 
 .forecast-list__content{

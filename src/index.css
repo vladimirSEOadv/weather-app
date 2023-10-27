@@ -3,8 +3,17 @@
   font-weight: 400;
   line-height: 1.5;
 
-  /*color: rgba(255, 255, 255, 0.87);*/
-  /*background-color: #242424;*/
+	/*COLORS*/
+	--main-color: #4682A9;
+	--secondary-color: #749BC2;
+	--secondary-color3: #91C8E4;
+	--secondary-color4: #F6F4EB;
+	--secondary-color5: #8a8a8a;
+	/*ACCENT-COLORS*/
+	--dark-accent-color: #171616;
+	--light-accent-color: #f3eded;
+
+
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
