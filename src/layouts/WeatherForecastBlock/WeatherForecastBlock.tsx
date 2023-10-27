@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from "react";
-import {CustomButton} from "../CustomButton/CustomButton";
+import {CustomButton} from "../../components/CustomButton/CustomButton";
 import {useWeatherForecast} from "../../hooks/useWeatherForecast";
 import {DayForecastCard} from "../DayForecastCard/DayForecastCard";
-import {DebounceInput} from "../DebounceInput/DebounceInput";
-import {LoadingBlock} from "../LoadingBlock/LoadingBlock";
+import {DebounceInput} from "../../components/DebounceInput/DebounceInput";
+import {LoadingBlock} from "../../components/LoadingBlock/LoadingBlock";
 import styles from "./WeatherForecastBlock.module.css";
 import {WeekForecastCard} from "../WeekForecastCard/WeekForecastCard";
+import {useLocalStore} from "../../hooks/useLocalStore";
 
 export const WeatherForecastBlock: React.FC = ({
 																								 deleteCallback,
@@ -30,15 +31,7 @@ export const WeatherForecastBlock: React.FC = ({
 		}
 	}, [weekForecast, dayForecast, dayOrWeek]);
 
-	const addToFavorite = () => {
-		if (!city) return;
-		const storage = localStorage.getItem("favoriteWeatherCity");
-		const cityList = storage ? JSON.parse(storage) : [];
-		if (!cityList.includes(city)) {
-			cityList.push(city);
-		}
-		localStorage.setItem("favoriteWeatherCity", JSON.stringify(cityList));
-	};
+	const {addToLocalStore} = useLocalStore("favoriteWeatherCity")
 
 	const content = {
 		showData: (
@@ -89,7 +82,7 @@ export const WeatherForecastBlock: React.FC = ({
 							placeholder={"Search"}
 					/>
 					<div className={styles["header-forecast__buttons"]}>
-						<CustomButton disabled={!city} cb={addToFavorite} text={"В обране"}/>
+						<CustomButton disabled={!city} cb={()=> addToLocalStore(city)} text={"В обране"}/>
 						<CustomButton cb={() => deleteCallback(id)} text={"Видалити"}/>
 					</div>
 				</div>
