@@ -1,25 +1,25 @@
-import {useEffect, useState} from "react";
-import {getUserCity} from '../utils/getUserCity'
+import { useEffect, useState } from "react";
+import { getUserCity } from "../utils/getUserCity";
 
 export const useIpForFindLocation = () => {
-	const [userLocation, setUserLocation] = useState(null);
-	const [loading, setLoading] = useState(true);
-	const [error, setError] = useState(null);
+  const [userLocation, setUserLocation] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<Error | null>(null);
 
-	useEffect(() => {
-		const getData = async () => {
-			try {
-				const location = await getUserCity()
-				setUserLocation(location)
-			} catch (error) {
-				setError(error);
-				console.log(error)
-			} finally {
-				setLoading(false);
-			}
-		};
-		getData()
-	}, [])
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const location = await getUserCity();
+        setUserLocation(location);
+      } catch (error) {
+        setError(error);
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    getData();
+  }, []);
 
-	return {userLocation, loading, error}
-}
+  return { userLocation, loading, error };
+};

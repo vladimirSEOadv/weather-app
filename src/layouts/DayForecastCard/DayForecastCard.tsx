@@ -1,14 +1,17 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import styles from "./DayForecastCard.module.css";
 import arrowIcon from "../../assets/arrowUp.svg";
-import {makeConvertedDate} from "../../utils/makeConvertedDate";
-import {LangContext} from "../../contex/LangContextWrapper/LangContextWrapper";
+import { makeConvertedDate } from "../../utils/makeConvertedDate";
+import { LangContext } from "../../contex/LangContextWrapper/LangContextWrapper";
 // import { WiDaySunny } from "react-icons/wi";
 
 export const DayForecastCard: React.FC = ({ data }) => {
-  const {currentLang} = useContext(LangContext)
+  const { currentLang } = useContext(LangContext);
 
-  const {day, monthName, year} = makeConvertedDate({unixDate: data.dt, lang: currentLang})
+  const { day, monthName, year } = makeConvertedDate({
+    unixDate: data.dt,
+    lang: currentLang,
+  });
   return (
     <div className={`${styles["day-forecast-card"]}`}>
       <header className={styles["day-forecast-card__title"]}>
@@ -16,7 +19,9 @@ export const DayForecastCard: React.FC = ({ data }) => {
           Погода в {data.name}
         </h2>
         <p>
-          <time>{day} {monthName} {year}</time>
+          <time>
+            {day} {monthName} {year}
+          </time>
         </p>
       </header>
       <div

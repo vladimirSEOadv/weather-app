@@ -17,7 +17,7 @@ ChartJS.register(
   BarElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
 );
 
 export const options = {
@@ -43,21 +43,39 @@ const daysOfWeek = [
   "Saturday",
 ];
 
-const labels = daysOfWeek;
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: "Weather forecast for 5 days",
-      data: [1, 2, 3, 4, 5, 6, 7],
-      backgroundColor: "rgba(255, 99, 132, 0.5)",
-    },
-  ],
+const makeChartData = ({ info: weekForecast, title }) => {
+  const chartData = {
+    labels: [],
+    datasets: [
+      {
+        label: title,
+        data: [],
+        backgroundColor: "rgba(255, 99, 132, 0.5)",
+      },
+    ],
+  };
+
+  for (const time in weekForecast) {
+    if (weekForecast.hasOwnProperty(time)) {
+      chartData.labels.push(time);
+      chartData.datasets[0].data.push(weekForecast[time]);
+    }
+  }
+  return chartData;
 };
-export const Chart: React.FC = () => {
+
+export const Chart: React.FC = ({
+  weekForecast,
+  datasetName = "Weather forecast for 5 days",
+}) => {
+  const chartData = makeChartData({
+    title: datasetName,
+    info: { Sunday: 1, Monday: 2 },
+  });
+
   return (
     <div className={styles["chart"]}>
-      <Bar options={options} data={data} />
+      <Bar options={options} data={chartData} />
     </div>
   );
 };

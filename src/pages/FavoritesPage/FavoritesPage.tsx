@@ -1,18 +1,15 @@
 import React from "react";
 import styles from "./FavoritesPage.module.css";
-import {Outlet} from "react-router-dom";
+import { WeatherForecastList } from "../../layouts/WeatherForecastList/WeatherForecastList";
 
 export const FavoritesPage: React.FC = () => {
-  const data = [{sity: "Text", temp: 42, wind: 25}]
-	return (
-			<div className={styles["favorite-page"]}>
-				<div className="container">
-					<div className={`${styles["favorite-page__content"]} ${styles["safe-padding"]}`}>
-						<div className="favorite-page__card">
-              Favorite
-            </div>
-					</div>
-				</div>
-			</div>
-	)
-}
+  return (
+    <>
+      <div className={styles["favorite-page"]}>
+        <div className="container">
+          <WeatherForecastList isFavoritePage={true} />
+        </div>
+      </div>
+    </>
+  );
+};

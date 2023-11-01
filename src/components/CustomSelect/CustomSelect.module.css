@@ -1,15 +1,13 @@
 .select {
-	font-size: 1.125rem  /* 18/16 */;
-	width: 100%;
-	border: 1px solid var(--dark-accent-color);
-	padding: 4px 6px;
-	border-radius: 5px;
+  font-size: 1.125rem /* 18/16 */;
+  width: 100%;
+  border: 1px solid var(--dark-accent-color);
+  padding: 4px 6px;
+  border-radius: 5px;
 }
 
-.select__options{
-
+.select__options {
 }
 
-.select__options:hover{
-
+.select__options:hover {
 }

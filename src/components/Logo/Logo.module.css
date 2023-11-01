@@ -1,11 +1,11 @@
 .logo {
-    max-width: 4.375rem  /* 70/16 */;
-    min-width: 4.375rem  /* 70/16 */;
-    /*width: 70px;*/
-    padding: 15px;
+  max-width: 4.375rem /* 70/16 */;
+  min-width: 4.375rem /* 70/16 */;
+  /*width: 70px;*/
+  padding: 15px;
 }
 
 .logo__img {
-    width: 100%;
-    transform: translateY(5px);
+  width: 100%;
+  transform: translateY(5px);
 }

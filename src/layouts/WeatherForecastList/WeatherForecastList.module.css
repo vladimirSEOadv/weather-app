@@ -1,16 +1,15 @@
-.forecast-list{
+.forecast-list {
 }
 
-.forecast-list__header{
-	margin-bottom: 0.5rem;
+.forecast-list__header {
+  margin-bottom: 0.5rem;
 }
 
-.header-forecast__wrapper-for-add-button{
-
+.header-forecast__wrapper-for-add-button {
 }
 
-.forecast-list__content{
-	display: flex;
-	flex-direction: column;
-	gap: 15px;
+.forecast-list__content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
