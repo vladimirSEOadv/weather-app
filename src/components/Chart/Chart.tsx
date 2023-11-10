@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -10,6 +10,8 @@ import {
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 import styles from "./Chart.module.css";
+import { makeWeekForecastData } from "../../utils/makeWeekForecastData.ts";
+import { LangContext } from "../../contex/LangContextWrapper/LangContextWrapper.tsx";
 
 ChartJS.register(
   CategoryScale,
@@ -20,7 +22,7 @@ ChartJS.register(
   Legend,
 );
 
-export const options = {
+const stylesChartConfig = {
   responsive: true,
   plugins: {
     legend: {
@@ -33,17 +35,18 @@ export const options = {
   },
 };
 
-const daysOfWeek = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
+interface makeChartDataProps {
+  label: string;
+  info: number;
+}
 
-const makeChartData = ({ info: weekForecast, title }) => {
+const makeDataForChart = ({
+  formatedData,
+  title,
+}: {
+  formatedData: makeChartDataProps[];
+  title: string;
+}) => {
   const chartData = {
     labels: [],
     datasets: [
@@ -55,27 +58,45 @@ const makeChartData = ({ info: weekForecast, title }) => {
     ],
   };
 
-  for (const time in weekForecast) {
-    if (weekForecast.hasOwnProperty(time)) {
-      chartData.labels.push(time);
-      chartData.datasets[0].data.push(weekForecast[time]);
-    }
+  for (const day in formatedData) {
+    const { label, info } = formatedData[day];
+    chartData.labels.push(label);
+    chartData.datasets[0].data.push(info);
   }
   return chartData;
 };
 
-export const Chart: React.FC = ({
+interface ChartProps {
+  weekForecast: any;
+  datasetName?: string;
+}
+
+export const Chart: React.FC<ChartProps> = ({
   weekForecast,
   datasetName = "Weather forecast for 5 days",
 }) => {
-  const chartData = makeChartData({
+  const { currentLang } = useContext(LangContext);
+  const formatedData = makeWeekForecastData(weekForecast, currentLang);
+  const dataForChart = makeDataForChart({
     title: datasetName,
-    info: { Sunday: 1, Monday: 2 },
+    formatedData,
   });
 
   return (
     <div className={styles["chart"]}>
-      <Bar options={options} data={chartData} />
+      <Bar options={stylesChartConfig} data={dataForChart} />
     </div>
   );
 };
+
+// Необходимый формат
+// const test = [
+//   {
+//     label: "text1",
+//     info: 1,
+//   },
+//   {
+//     label: "text2",
+//     info: 2,
+//   },
+// ];

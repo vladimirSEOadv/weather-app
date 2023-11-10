@@ -3,7 +3,7 @@ import { LangContext } from "../contex/LangContextWrapper/LangContextWrapper";
 import { getWeekForecast } from "../utils/getWeekForecast";
 import { getDayForecast } from "../utils/getDayForecast";
 
-export const useWeatherForecast = (city, mode) => {
+export const useWeatherForecast = (city: string, mode: "day" | "week") => {
   const [weekForecast, setWeekForecast] = useState(null);
   const [dayForecast, setDayForecast] = useState(null);
   const { currentLang } = useContext(LangContext);

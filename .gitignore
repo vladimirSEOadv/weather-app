@@ -26,3 +26,4 @@ dist-ssr
 *.sw?
 task.md
 task.png
+/src/trash/

@@ -2,9 +2,14 @@ import { useEffect, useState } from "react";
 import { useIpForFindLocation } from "./useIpForFindLocation";
 import { useLocalStore } from "./useLocalStore";
 
-export const useMapForecastList = (isFavoritePage) => {
+interface WeatherBlock {
+  id: number;
+  location: string | null;
+}
+
+export const useMapForecastList = (isFavoritePage: boolean) => {
   const { userLocation } = useIpForFindLocation();
-  const [weatherBlocks, setWeatherBlocks] = useState([]);
+  const [weatherBlocks, setWeatherBlocks] = useState<WeatherBlock[]>([]);
   const { getLocalStoreData, removeCity } = useLocalStore();
   useEffect(() => {
     if (userLocation && !isFavoritePage) {
@@ -29,15 +34,18 @@ export const useMapForecastList = (isFavoritePage) => {
       const idForNewBlock = weatherBlocks.reduce((acc, current) => {
         return acc > current.id ? acc : current.id;
       }, 0);
-      setWeatherBlocks((prevState) => {
+      setWeatherBlocks((prevState: WeatherBlock[]) => {
         return [...prevState, { id: idForNewBlock + 1, location: null }];
       });
     }
   };
 
-  const deleteBlock = (id) => {
+  const deleteBlock = (id: number) => {
     if (isFavoritePage) {
-      removeCity(weatherBlocks[id].location);
+      const block = weatherBlocks.find((block) => block.id === id);
+      if (block && block.location !== null) {
+        removeCity(block.location);
+      }
     }
     setWeatherBlocks((prev) => prev.filter((block) => block.id !== id));
   };

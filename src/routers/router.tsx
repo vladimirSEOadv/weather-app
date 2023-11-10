@@ -2,7 +2,6 @@ import { createBrowserRouter } from "react-router-dom";
 import { MainLayout } from "../layouts/MainLayout/MainLayout";
 import { MainPage } from "../pages/MainPage/MainPage";
 import { FavoritesPage } from "../pages/FavoritesPage/FavoritesPage";
-import { CityPage } from "../pages/CityPage/CityPage";
 import { NotFoundPage } from "../pages/NotFoundPage/NotFoundPage";
 
 export const router = createBrowserRouter([
@@ -13,7 +12,8 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <MainPage /> },
       { path: "/favorites", element: <FavoritesPage /> },
-      { path: "/favorites/:city", element: <CityPage /> },
+      // TODO Add city pages
+      // { path: "/favorites/:city", element: <CityPage /> },
     ],
   },
 ]);

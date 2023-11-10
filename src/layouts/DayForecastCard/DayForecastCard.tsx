@@ -8,9 +8,11 @@ import { LangContext } from "../../contex/LangContextWrapper/LangContextWrapper"
 export const DayForecastCard: React.FC = ({ data }) => {
   const { currentLang } = useContext(LangContext);
 
-  const { day, monthName, year } = makeConvertedDate({
+  const { dayNumber, dayOfWeek, monthName, year } = makeConvertedDate({
     unixDate: data.dt,
-    lang: currentLang,
+    currentLang,
+    monthFormat: "MMMM",
+    dayOfWeekFormat: "EEEE", // EEE = Mon, Sun etc..
   });
   return (
     <div className={`${styles["day-forecast-card"]}`}>
@@ -20,7 +22,7 @@ export const DayForecastCard: React.FC = ({ data }) => {
         </h2>
         <p>
           <time>
-            {day} {monthName} {year}
+            {dayOfWeek} {dayNumber} {monthName} {year}
           </time>
         </p>
       </header>

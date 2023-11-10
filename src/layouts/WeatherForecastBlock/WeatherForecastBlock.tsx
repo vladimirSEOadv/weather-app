@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { CustomButton } from "../../components/CustomButton/CustomButton";
+import {
+  ButtonVariant,
+  CustomButton,
+} from "../../components/CustomButton/CustomButton";
 import { useWeatherForecast } from "../../hooks/useWeatherForecast";
 import { DayForecastCard } from "../DayForecastCard/DayForecastCard";
 import { DebounceInput } from "../../components/DebounceInput/DebounceInput";
@@ -8,16 +11,23 @@ import styles from "./WeatherForecastBlock.module.css";
 import { WeekForecastCard } from "../WeekForecastCard/WeekForecastCard";
 import { useLocalStore } from "../../hooks/useLocalStore";
 
-export const WeatherForecastBlock: React.FC = ({
+interface WeatherForecastBlockProps {
+  isFavoritePage: boolean;
+  deleteCallback: () => void;
+  id: number;
+  location: string;
+}
+
+export const WeatherForecastBlock: React.FC<WeatherForecastBlockProps> = ({
   isFavoritePage,
   deleteCallback,
   id,
   location,
 }) => {
   const [city, setCity] = useState<String>(location || "");
-  const [forecastForWeek, setForecastForWeek] = useState(null);
-  const [forecastForDay, setForecastForDay] = useState(null);
-  const [dayOrWeek, setDayOrWeek] = useState("week"); // "week" | "day"
+  const [forecastForWeek, setForecastForWeek] = useState<any>(null);
+  const [forecastForDay, setForecastForDay] = useState<any>(null);
+  const [dayOrWeek, setDayOrWeek] = useState<"day" | "week">("week"); // "week" | "day"
   const { weekForecast, dayForecast, loading, error } = useWeatherForecast(
     city.trim(),
     dayOrWeek,
@@ -43,7 +53,7 @@ export const WeatherForecastBlock: React.FC = ({
           <div className={styles["forecast-block__tabs"]}>
             <CustomButton
               disabled={dayOrWeek === "day"}
-              variant={"small"}
+              variant={"small" as ButtonVariant}
               cb={() => {
                 setDayOrWeek("day");
               }}
@@ -51,7 +61,7 @@ export const WeatherForecastBlock: React.FC = ({
             />
             <CustomButton
               disabled={dayOrWeek === "week"}
-              variant={"small"}
+              variant={"small" as ButtonVariant}
               cb={() => setDayOrWeek("week")}
               text={"Тиждень"}
             />

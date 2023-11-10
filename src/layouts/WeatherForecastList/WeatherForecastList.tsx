@@ -4,7 +4,11 @@ import { WeatherForecastBlock } from "../../layouts/WeatherForecastBlock/Weather
 import { CustomButton } from "../../components/CustomButton/CustomButton";
 import { useMapForecastList } from "../../hooks/useMapForecastList";
 
-export const WeatherForecastList: React.FC = ({ isFavoritePage }) => {
+interface WeatherForecastListProps {
+    isFavoritePage: boolean
+}
+
+export const WeatherForecastList: React.FC<WeatherForecastListProps> = ({ isFavoritePage }) => {
   const { weatherBlocks, createBlock, deleteBlock } =
     useMapForecastList(isFavoritePage);
   return (

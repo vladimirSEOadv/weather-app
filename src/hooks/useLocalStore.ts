@@ -1,9 +1,15 @@
-export const useLocalStore = (key = "favoriteWeatherCity") => {
-  function getLocalStoreData() {
-    return JSON.parse(localStorage.getItem(key)) || [];
+export const useLocalStore = (key: string = "favoriteWeatherCity") => {
+  function getLocalStoreData(): string[] {
+    const storeDataString = localStorage.getItem(key);
+    if (storeDataString) {
+      const storeData: string[] = JSON.parse(storeDataString);
+      return storeData;
+    } else {
+      return [];
+    }
   }
 
-  function setLocalStorageData(key, data) {
+  function setLocalStorageData(key: string, data: string[]): void {
     localStorage.setItem(key, JSON.stringify(data));
   }
 
@@ -30,9 +36,9 @@ export const useLocalStore = (key = "favoriteWeatherCity") => {
   return { getLocalStoreData, addCity, removeCity };
 };
 // TODO доделать класс LocalStoreClass
-class LocalStoreClass {
-  private key: string;
-  constructor(key) {
-    this.key = key;
-  }
-}
+// class LocalStoreClass {
+//   private key: string;
+//   constructor(key: string) {
+//     this.key = key;
+//   }
+// }
