@@ -39,6 +39,5 @@ export const makeWeekForecastData = (data: any, currentLang: string) => {
       info: averageTempForDay,
     });
   }
-  console.log("result", result);
   return result;
 };
