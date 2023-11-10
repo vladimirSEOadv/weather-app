@@ -2,13 +2,13 @@ import React, { ChangeEvent } from "react";
 import styles from "./CustomInput.module.css";
 
 interface CustomInputInterface {
-  placeholder: string;
+  placeholder?: string;
   cb: (value: string) => void;
   value?: string;
 }
 
 export const CustomInput: React.FC<CustomInputInterface> = ({
-  placeholder,
+  placeholder = "",
   cb,
   value = "",
 }) => {

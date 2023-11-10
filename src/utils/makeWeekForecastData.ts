@@ -1,30 +1,52 @@
-import { makeConvertedDate } from "./makeConvertedDate.ts";
+import { DateInfoInterface, makeConvertedDate } from "./makeConvertedDate.ts";
 
-export const makeWeekForecastData = (data: any, currentLang: string) => {
-  const dataAggregatedByDays = data.list.reduce((acc, current) => {
-    const { yearMonthDay, year, monthNumber, monthName, dayNumber, dayOfWeek } =
-      makeConvertedDate({
+interface WeekForecastResultInterface {
+  label: string;
+  info: number;
+}
+interface AggregatedDataInterface {
+  year: number;
+  monthNumber: number;
+  monthName: string;
+  dayNumber: number;
+  dayOfWeek: string;
+  temp: number[];
+}
+export const makeWeekForecastData = (
+  data: any,
+  currentLang: string,
+): WeekForecastResultInterface[] => {
+  const dataAggregatedByDays: Record<string, AggregatedDataInterface> =
+    data.list.reduce((acc, current) => {
+      const {
+        yearMonthDay,
+        year,
+        monthNumber,
+        monthName,
+        dayNumber,
+        dayOfWeek,
+      }: DateInfoInterface = makeConvertedDate({
         unixDate: current.dt,
         currentLang,
         monthFormat: "MMMM",
         dayOfWeekFormat: "EEE",
       });
 
-    if (acc.hasOwnProperty(yearMonthDay)) {
-      acc[yearMonthDay!].temp.push(current.main.temp);
-    } else {
-      acc[yearMonthDay!] = {
-        year,
-        monthNumber,
-        monthName,
-        dayNumber,
-        dayOfWeek,
-        temp: [current.main.temp],
-      };
-    }
+      if (acc.hasOwnProperty(yearMonthDay)) {
+        acc[yearMonthDay!].temp.push(current.main.temp);
+      } else {
+        acc[yearMonthDay!] = {
+          year,
+          monthNumber,
+          monthName,
+          dayNumber,
+          dayOfWeek,
+          temp: [current.main.temp],
+        };
+      }
 
-    return acc;
-  }, {});
+      return acc;
+    }, {});
 
   const result = [];
 

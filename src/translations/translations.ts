@@ -5,6 +5,7 @@
 //   },
 // };
 
+// @ts-ignore
 type TranslationsValue = string | string[] | Record<string, TranslationsValue>;
 
 interface TranslationsInterface {

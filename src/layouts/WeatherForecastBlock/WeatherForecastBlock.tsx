@@ -15,7 +15,7 @@ import { translations } from "../../translations/translations.ts";
 
 interface WeatherForecastBlockProps {
   isFavoritePage: boolean;
-  deleteCallback: () => void;
+  deleteCallback: (id: number) => void;
   id: number;
   location: string;
 }
@@ -27,7 +27,7 @@ export const WeatherForecastBlock: React.FC<WeatherForecastBlockProps> = ({
   location,
 }) => {
   const { currentLang } = useContext(LangContext);
-  const [city, setCity] = useState<String>(location || "");
+  const [city, setCity] = useState<string>(location || "");
   const [forecastForWeek, setForecastForWeek] = useState<any>(null);
   const [forecastForDay, setForecastForDay] = useState<any>(null);
   const [dayOrWeek, setDayOrWeek] = useState<"day" | "week">("week"); // "week" | "day"
@@ -74,10 +74,7 @@ export const WeatherForecastBlock: React.FC<WeatherForecastBlockProps> = ({
         {dayOrWeek === "day" && forecastForDay ? (
           <DayForecastCard data={forecastForDay} />
         ) : (
-          <WeekForecastCard
-            forecastForWeek={forecastForWeek}
-            dayOrWeek={dayOrWeek}
-          />
+          <WeekForecastCard forecastForWeek={forecastForWeek} />
         )}
       </div>
     ),

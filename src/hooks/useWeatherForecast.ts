@@ -2,13 +2,14 @@ import { useContext, useEffect, useState } from "react";
 import { LangContext } from "../contex/LangContextWrapper/LangContextWrapper";
 import { getWeekForecast } from "../utils/getWeekForecast";
 import { getDayForecast } from "../utils/getDayForecast";
+import { isAxiosError } from "axios";
 
 export const useWeatherForecast = (city: string, mode: "day" | "week") => {
   const [weekForecast, setWeekForecast] = useState(null);
   const [dayForecast, setDayForecast] = useState(null);
   const { currentLang } = useContext(LangContext);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
     if (!city) return;
@@ -27,9 +28,12 @@ export const useWeatherForecast = (city: string, mode: "day" | "week") => {
             break;
         }
       } catch (error) {
-        setError(error);
-        console.log("Catch Error");
-        console.log(error);
+        if (isAxiosError(error)) {
+          setError(error);
+        } else {
+          console.log("Catch Error");
+          console.log(error);
+        }
       } finally {
         setLoading(false);
       }

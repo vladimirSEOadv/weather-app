@@ -3,9 +3,22 @@ import { CustomInput } from "../CustomInput/CustomInput";
 import { DebounceInputLoader } from "./DebounceInputLoader/DebounceInputLoader.tsx";
 import styles from "./DebounceInput.module.css";
 
-export const DebounceInput: React.FC = ({ cb, delay, value, ...props }) => {
-  const [inputValue, setInputValue] = useState(value);
-  const [showLoader, setShowLoader] = useState(false);
+interface DebounceInputInterface {
+  cb: (value: string) => void;
+  delay: number;
+  value: string;
+  placeholder?: string;
+}
+
+export const DebounceInput: React.FC<DebounceInputInterface> = ({
+  cb,
+  delay,
+  value,
+  placeholder = "",
+  ...props
+}) => {
+  const [inputValue, setInputValue] = useState<string>(value);
+  const [showLoader, setShowLoader] = useState<boolean>(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -17,7 +30,7 @@ export const DebounceInput: React.FC = ({ cb, delay, value, ...props }) => {
     };
   }, [inputValue, cb, delay]);
 
-  const handleChange = (value) => {
+  const handleChange = (value: string): void => {
     setShowLoader(true);
     setInputValue(value);
   };

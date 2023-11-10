@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getUserCity } from "../utils/getUserCity";
+import { isAxiosError } from "axios";
 
 export const useIpForFindLocation = () => {
   const [userLocation, setUserLocation] = useState<string | null>(null);
@@ -12,7 +13,9 @@ export const useIpForFindLocation = () => {
         const location = await getUserCity();
         setUserLocation(location);
       } catch (error) {
-        setError(error);
+        if (isAxiosError(error)) {
+          setError(error);
+        }
         console.log(error);
       } finally {
         setLoading(false);

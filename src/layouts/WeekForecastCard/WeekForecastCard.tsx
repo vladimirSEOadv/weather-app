@@ -5,7 +5,13 @@ import { CustomSelect } from "../../components/CustomSelect/CustomSelect";
 import { LangContext } from "../../contex/LangContextWrapper/LangContextWrapper.tsx";
 import { translations } from "../../translations/translations.ts";
 
-export const WeekForecastCard: React.FC = ({ forecastForWeek, dayOrWeek }) => {
+interface WeekForecastCardInterface {
+  forecastForWeek: any;
+}
+
+export const WeekForecastCard: React.FC<WeekForecastCardInterface> = ({
+  forecastForWeek,
+}) => {
   const { currentLang } = useContext(LangContext);
   const options = translations.selects.dayOrNight[currentLang];
   const [dailyOrNightly, setDailyOrNightly] = useState(0);
