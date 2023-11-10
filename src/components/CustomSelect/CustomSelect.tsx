@@ -13,11 +13,6 @@ export const CustomSelect = ({ options, cb, value }: CustomSelectProps) => {
   if (!options.length) {
     throw new Error("Error of custom select. Empty options in select props");
   }
-  if (!options.includes(value)) {
-    throw new Error(
-      "Error of custom select. Options must be includes initial value",
-    );
-  }
   const handlerChange = (event: React.ChangeEvent<HTMLSelectElement>): void => {
     cb(event.target.value);
   };

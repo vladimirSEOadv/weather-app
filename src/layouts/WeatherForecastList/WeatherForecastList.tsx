@@ -1,14 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "./WeatherForecastList.module.css";
 import { WeatherForecastBlock } from "../../layouts/WeatherForecastBlock/WeatherForecastBlock";
 import { CustomButton } from "../../components/CustomButton/CustomButton";
 import { useMapForecastList } from "../../hooks/useMapForecastList";
+import { LangContext } from "../../contex/LangContextWrapper/LangContextWrapper.tsx";
+import { translations } from "../../translations/translations.ts";
 
 interface WeatherForecastListProps {
-    isFavoritePage: boolean
+  isFavoritePage: boolean;
 }
 
-export const WeatherForecastList: React.FC<WeatherForecastListProps> = ({ isFavoritePage }) => {
+export const WeatherForecastList: React.FC<WeatherForecastListProps> = ({
+  isFavoritePage,
+}) => {
+  const { currentLang } = useContext(LangContext);
   const { weatherBlocks, createBlock, deleteBlock } =
     useMapForecastList(isFavoritePage);
   return (
@@ -20,7 +25,10 @@ export const WeatherForecastList: React.FC<WeatherForecastListProps> = ({ isFavo
           <div
             className={`${styles["header-forecast__wrapper-for-add-button"]}`}
           >
-            <CustomButton cb={createBlock} text={"Додати блок"} />
+            <CustomButton
+              cb={createBlock}
+              text={translations.buttons.addBlock[currentLang]}
+            />
           </div>
         </div>
       )}

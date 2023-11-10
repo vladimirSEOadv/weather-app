@@ -2,8 +2,7 @@ export const useLocalStore = (key: string = "favoriteWeatherCity") => {
   function getLocalStoreData(): string[] {
     const storeDataString = localStorage.getItem(key);
     if (storeDataString) {
-      const storeData: string[] = JSON.parse(storeDataString);
-      return storeData;
+      return JSON.parse(storeDataString);
     } else {
       return [];
     }
@@ -35,10 +34,4 @@ export const useLocalStore = (key: string = "favoriteWeatherCity") => {
 
   return { getLocalStoreData, addCity, removeCity };
 };
-// TODO доделать класс LocalStoreClass
-// class LocalStoreClass {
-//   private key: string;
-//   constructor(key: string) {
-//     this.key = key;
-//   }
-// }
+// TODO cделать класс LocalStoreClass

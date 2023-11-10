@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   ButtonVariant,
   CustomButton,
@@ -10,6 +10,8 @@ import { LoadingBlock } from "../../components/LoadingBlock/LoadingBlock";
 import styles from "./WeatherForecastBlock.module.css";
 import { WeekForecastCard } from "../WeekForecastCard/WeekForecastCard";
 import { useLocalStore } from "../../hooks/useLocalStore";
+import { LangContext } from "../../contex/LangContextWrapper/LangContextWrapper.tsx";
+import { translations } from "../../translations/translations.ts";
 
 interface WeatherForecastBlockProps {
   isFavoritePage: boolean;
@@ -24,6 +26,7 @@ export const WeatherForecastBlock: React.FC<WeatherForecastBlockProps> = ({
   id,
   location,
 }) => {
+  const { currentLang } = useContext(LangContext);
   const [city, setCity] = useState<String>(location || "");
   const [forecastForWeek, setForecastForWeek] = useState<any>(null);
   const [forecastForDay, setForecastForDay] = useState<any>(null);
@@ -57,13 +60,13 @@ export const WeatherForecastBlock: React.FC<WeatherForecastBlockProps> = ({
               cb={() => {
                 setDayOrWeek("day");
               }}
-              text={"День"}
+              text={translations.buttons.day[currentLang]}
             />
             <CustomButton
               disabled={dayOrWeek === "week"}
               variant={"small" as ButtonVariant}
               cb={() => setDayOrWeek("week")}
-              text={"Тиждень"}
+              text={translations.buttons.week[currentLang]}
             />
             <div className={styles["select-wrapper"]}></div>
           </div>
@@ -71,7 +74,10 @@ export const WeatherForecastBlock: React.FC<WeatherForecastBlockProps> = ({
         {dayOrWeek === "day" && forecastForDay ? (
           <DayForecastCard data={forecastForDay} />
         ) : (
-          <WeekForecastCard data={forecastForWeek} dayOrWeek={dayOrWeek} />
+          <WeekForecastCard
+            forecastForWeek={forecastForWeek}
+            dayOrWeek={dayOrWeek}
+          />
         )}
       </div>
     ),
@@ -97,10 +103,13 @@ export const WeatherForecastBlock: React.FC<WeatherForecastBlockProps> = ({
             <CustomButton
               disabled={!city}
               cb={() => addCity(city)}
-              text={"В обране"}
+              text={translations.buttons.addToFavorite[currentLang]}
             />
           )}
-          <CustomButton cb={() => deleteCallback(id)} text={"Видалити"} />
+          <CustomButton
+            cb={() => deleteCallback(id)}
+            text={translations.buttons.deleteButton[currentLang]}
+          />
         </div>
       </div>
       {loading && !!city && content.loading}

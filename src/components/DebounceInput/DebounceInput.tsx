@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { CustomInput } from "../CustomInput/CustomInput";
-import { Loader } from "../Loader/Loader";
+import { DebounceInputLoader } from "./DebounceInputLoader/DebounceInputLoader.tsx";
 import styles from "./DebounceInput.module.css";
 
 export const DebounceInput: React.FC = ({ cb, delay, value, ...props }) => {
@@ -25,7 +25,7 @@ export const DebounceInput: React.FC = ({ cb, delay, value, ...props }) => {
   return (
     <div className={styles["debounce-input"]}>
       <CustomInput {...props} value={inputValue} cb={handleChange} />
-      {showLoader && <Loader />}
+      {showLoader && <DebounceInputLoader />}
     </div>
   );
 };

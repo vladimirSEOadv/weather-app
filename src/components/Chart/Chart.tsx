@@ -22,7 +22,20 @@ ChartJS.register(
   Legend,
 );
 
-const stylesChartConfig = {
+interface StylesChartConfigInterface {
+  responsive: boolean;
+  plugins: {
+    legend: {
+      position: "top";
+    };
+    title: {
+      display: boolean;
+      text: string;
+    };
+  };
+}
+
+const stylesChartConfig: StylesChartConfigInterface = {
   responsive: true,
   plugins: {
     legend: {
@@ -41,10 +54,10 @@ interface makeChartDataProps {
 }
 
 const makeDataForChart = ({
-  formatedData,
+  formattedData,
   title,
 }: {
-  formatedData: makeChartDataProps[];
+  formattedData: makeChartDataProps[];
   title: string;
 }) => {
   const chartData = {
@@ -58,8 +71,13 @@ const makeDataForChart = ({
     ],
   };
 
-  for (const day in formatedData) {
-    const { label, info } = formatedData[day];
+  interface oneBarInterface {
+    label: string;
+    info: number;
+  }
+
+  for (const day in formattedData) {
+    const { label, info }: oneBarInterface = formattedData[day];
     chartData.labels.push(label);
     chartData.datasets[0].data.push(info);
   }
@@ -67,19 +85,19 @@ const makeDataForChart = ({
 };
 
 interface ChartProps {
-  weekForecast: any;
+  forecastForWeek: any;
   datasetName?: string;
 }
 
 export const Chart: React.FC<ChartProps> = ({
-  weekForecast,
+  forecastForWeek,
   datasetName = "Weather forecast for 5 days",
 }) => {
   const { currentLang } = useContext(LangContext);
-  const formatedData = makeWeekForecastData(weekForecast, currentLang);
+  const formattedData = makeWeekForecastData(forecastForWeek, currentLang);
   const dataForChart = makeDataForChart({
     title: datasetName,
-    formatedData,
+    formattedData,
   });
 
   return (
@@ -88,15 +106,3 @@ export const Chart: React.FC<ChartProps> = ({
     </div>
   );
 };
-
-// Необходимый формат
-// const test = [
-//   {
-//     label: "text1",
-//     info: 1,
-//   },
-//   {
-//     label: "text2",
-//     info: 2,
-//   },
-// ];

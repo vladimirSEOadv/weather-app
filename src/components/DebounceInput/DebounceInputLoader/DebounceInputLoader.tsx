@@ -1,7 +1,7 @@
 import React from "react";
-import styles from "./Loader.module.css";
+import styles from "./DebounceInputLoader.module.css";
 
-export const Loader: React.FC = () => {
+export const DebounceInputLoader: React.FC = () => {
   return (
     <div className={styles["loader"]}>
       <div className={styles["lds-default"]}>

@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "./NavBar.module.css";
 import { Link } from "react-router-dom";
+import { translations } from "../../translations/translations.ts";
+import { LangContext } from "../../contex/LangContextWrapper/LangContextWrapper.tsx";
 
 export const NavBar: React.FC = () => {
+  const { currentLang } = useContext(LangContext);
   const linkData = [
-    { name: "Головна", path: "/" },
-    { name: "Обране", path: "/favorites" },
+    { name: translations.navLinks.main[currentLang], path: "/" },
+    { name: translations.navLinks.favorite[currentLang], path: "/favorites" },
   ];
 
   return (

@@ -25,6 +25,7 @@
 .default-button {
   border-radius: 5px;
   max-width: 150px;
+  white-space: nowrap;
 }
 
 .small-button {
