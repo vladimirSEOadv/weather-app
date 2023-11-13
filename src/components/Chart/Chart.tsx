@@ -77,8 +77,11 @@ const makeDataForChart = ({
   }
 
   for (const day in formattedData) {
+    // @ts-ignore
     const { label, info }: oneBarInterface = formattedData[day];
+    // @ts-ignore
     chartData.labels.push(label);
+    // @ts-ignore
     chartData.datasets[0].data.push(info);
   }
   return chartData;

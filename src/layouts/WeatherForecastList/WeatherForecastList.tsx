@@ -16,6 +16,7 @@ export const WeatherForecastList: React.FC<WeatherForecastListProps> = ({
   const { currentLang } = useContext(LangContext);
   const { weatherBlocks, createBlock, deleteBlock } =
     useMapForecastList(isFavoritePage);
+
   return (
     <section className="forecast-list">
       {!isFavoritePage && (
@@ -40,6 +41,7 @@ export const WeatherForecastList: React.FC<WeatherForecastListProps> = ({
               key={item.id}
               id={item.id}
               deleteCallback={deleteBlock}
+              // @ts-ignore
               location={item.location}
             />
           ))}

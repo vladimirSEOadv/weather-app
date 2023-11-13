@@ -6,6 +6,7 @@ import { LangContext } from "../../contex/LangContextWrapper/LangContextWrapper"
 import { translations } from "../../translations/translations.ts";
 // import { WiDaySunny } from "react-icons/wi";
 
+// @ts-ignore
 export const DayForecastCard: React.FC = ({ data }) => {
   const { currentLang } = useContext(LangContext);
 

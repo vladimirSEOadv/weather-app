@@ -31,6 +31,7 @@ export const WeekForecastCard: React.FC<WeekForecastCardInterface> = ({
       <div className={styles["week-forecast-card__content"]}>
         <Chart
           forecastForWeek={forecastForWeek}
+          // @ts-ignore
           dailyOrNightly={dailyOrNightly}
         />
       </div>

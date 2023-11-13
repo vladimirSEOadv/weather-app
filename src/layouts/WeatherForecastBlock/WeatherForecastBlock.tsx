@@ -72,6 +72,7 @@ export const WeatherForecastBlock: React.FC<WeatherForecastBlockProps> = ({
           </div>
         </div>
         {dayOrWeek === "day" && forecastForDay ? (
+          // @ts-ignore
           <DayForecastCard data={forecastForDay} />
         ) : (
           <WeekForecastCard forecastForWeek={forecastForWeek} />

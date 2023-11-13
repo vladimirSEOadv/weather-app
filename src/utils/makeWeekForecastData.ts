@@ -17,6 +17,7 @@ export const makeWeekForecastData = (
   currentLang: string,
 ): WeekForecastResultInterface[] => {
   const dataAggregatedByDays: Record<string, AggregatedDataInterface> =
+    // @ts-ignore
     data.list.reduce((acc, current) => {
       const {
         yearMonthDay,
@@ -51,7 +52,9 @@ export const makeWeekForecastData = (
   const result = [];
 
   for (const day in dataAggregatedByDays) {
+    // @ts-ignore
     const { temp, dayOfWeek, dayNumber } = dataAggregatedByDays[day];
+    // @ts-ignore
     const sumOfTemp = temp.reduce((acc, current) => {
       return acc + current;
     }, 0); // Сумма всех замеров одного дня
